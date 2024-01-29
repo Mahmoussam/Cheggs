@@ -1,15 +1,15 @@
 #include <iostream>
 #include <string.h>
+#include "Color.h"
 using namespace std;
-const bool WHITE=false
-    ,BLACK=true;
+
 /**
  * Piece class represents parent class for all chess pieces
  * 
 */
 class Piece{
     private:
-        bool color;
+        Color color;
         char piece_tag;
         pair<int,int> pos;// x,y coordinates ,zero based
     protected:
@@ -20,7 +20,7 @@ class Piece{
          * Piece constructor: sets color and initial position
          * Children must set piece_tag according
         */
-        Piece(bool color,pair<int,int>pos){
+        Piece(Color color,pair<int,int>pos){
             this->color = color;
             this->pos = pos;
         }
@@ -33,7 +33,7 @@ class Piece{
             else 
                 return false;
         }
-        bool getColor(){
+        Color getColor(){
             return this->color;
         }
         char getNameTag(){
