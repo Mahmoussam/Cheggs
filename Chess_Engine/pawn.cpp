@@ -1,4 +1,12 @@
+#ifndef CH_PIECE_H
+#define CH_PIECE_H
 #include "piece.cpp"
+#endif
+/**
+ * Can move 2 steps forward if hasn't been moved yet
+ * Generally can only move 1 step forward
+ * gets promoted to Queen if reaches last rank
+*/
 class Pawn : public Piece{
     private:
         bool moved_yet;

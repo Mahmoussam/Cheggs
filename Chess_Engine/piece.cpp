@@ -28,7 +28,10 @@ class Piece{
             this->color = color;
             this->pos = pos;
         }
-        
+        /**
+         * move the piece to dest location if it is possible
+         * a child piece must implmenet `canMoveTo(pair<int,int>)`
+        */
         bool moveTo(std::pair<int,int>dest){
             
             
