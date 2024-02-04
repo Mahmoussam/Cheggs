@@ -7,6 +7,14 @@
 */
 class Bishop : public Piece{
     private:
+        
+    public:
+        Bishop(Color color,std::pair<int,int>pos) : Piece(color,pos){
+            this->piece_tag='B';
+        }
+        Bishop(){
+            
+        }
         bool canMoveTo(std::pair<int,int>& dest){
             bool result;
             std::pair<int,int> pos = this->getPos();
@@ -15,10 +23,5 @@ class Bishop : public Piece{
             result = (x_dif==y_dif);
             return result;
         }
-    public:
-        Bishop(Color color,std::pair<int,int>pos) : Piece(color,pos){
-            this->piece_tag='B';
-        }
-        
         
 };

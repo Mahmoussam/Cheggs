@@ -1,21 +1,52 @@
+#ifndef CH_PIECE_H
+#define CH_PIECE_H
+#include "piece.cpp"
+#endif
+
+#ifndef CH_BISHOP_H
+#define CH_BISHOP_H
 #include "bishop.cpp"
+#endif
+
+#ifndef CH_ROOK_H
+#define CH_ROOK_H
 #include "rook.cpp"
+#endif
 
 /**
- * Queen walks like a bishop + rook
+ * Queen walks as rook + bishop
 */
-class Queen : public Bishop, public Rook {
-private:
-    using Bishop::canMoveTo;  // Bring the canMoveTo function from Bishop into the Queen scope
-    using Rook::canMoveTo;    // Bring the canMoveTo function from Rook into the Queen scope
-    bool canMoveTo(std::pair<int, int>& dest) override {
-        // Call the canMoveTo functions from Bishop and Rook
-        return Bishop::canMoveTo(dest) || Rook::canMoveTo(dest);
-    }
-public:
-    Queen(Color color, std::pair<int, int> pos) : Bishop(color, pos), Rook(color, pos) {
-        this->piece_tag = 'Q';
-    }
+class Queen : public Piece{
+    private:
+        Bishop bishop_;
+        Rook rook_;
+        bool canMoveTo(std::pair<int,int>& dest){
+            bool result;
+            if(rook_.canMoveTo(dest) || bishop_.canMoveTo(dest))
+                result = true;
+            else
+                result = false;
+            return result;
+        }
 
-    
+    public:
+        Queen(Color color,std::pair<int,int>pos) : Piece(color,pos){
+            this->piece_tag='Q';
+            bishop_ = Bishop(color,pos);
+            rook_ = Rook(color,pos);
+        }
+        bool moveTo(std::pair<int,int>dest){
+            
+            
+            if(this->canMoveTo(dest)){
+                
+                this->pos=dest;
+                bishop_.setPos(dest);
+                rook_.setPos(dest);
+                return true;
+            }
+            else 
+                return false;
+        }
+        
 };

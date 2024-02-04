@@ -14,11 +14,7 @@ class Piece{
         Color color;
         char piece_tag;
         std::pair<int,int> pos;// x,y coordinates ,zero based
-        //abstract method, children must implement!
-        /**
-         * Check whether a piece can move to specific destination
-        */
-        virtual bool canMoveTo(std::pair<int,int>&)=0;
+        
     public:
         /**
          * Piece constructor: sets color and initial position
@@ -28,6 +24,14 @@ class Piece{
             this->color = color;
             this->pos = pos;
         }
+        Piece(){
+            
+        }
+        //abstract method, children must implement!
+        /**
+         * Check whether a piece can move to specific destination
+        */
+        virtual bool canMoveTo(std::pair<int,int>&)=0;
         /**
          * move the piece to dest location if it is possible
          * a child piece must implmenet `canMoveTo(pair<int,int>)`
@@ -48,6 +52,9 @@ class Piece{
         }
         char getNameTag(){
             return this->piece_tag;
+        }
+        void setPos(std::pair<int,int> pos){
+            this->pos = pos;
         }
         /**
          * getPos: return copy of current position of piece

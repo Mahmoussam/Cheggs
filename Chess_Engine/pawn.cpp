@@ -10,6 +10,18 @@
 class Pawn : public Piece{
     private:
         bool moved_yet;
+        
+        void set_moved(){
+            this->moved_yet=true;
+        }
+    public:
+        Pawn(Color color,std::pair<int,int>pos) : Piece(color,pos){
+            this->piece_tag='P';
+            this->moved_yet=false;
+        }
+        bool hasMovedYet(){
+            return this->moved_yet;
+        }
         bool canMoveTo(std::pair<int,int>& dest){
             bool result;
             
@@ -29,17 +41,6 @@ class Pawn : public Piece{
             }
             
             return result;
-        }
-        void set_moved(){
-            this->moved_yet=true;
-        }
-    public:
-        Pawn(Color color,std::pair<int,int>pos) : Piece(color,pos){
-            this->piece_tag='P';
-            this->moved_yet=false;
-        }
-        bool hasMovedYet(){
-            return this->moved_yet;
         }
         bool moveTo(std::pair<int,int>dest){
             

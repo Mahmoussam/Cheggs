@@ -7,6 +7,15 @@
 */
 class Rook : public Piece{
     private:
+        
+    public:
+        Rook(Color color,std::pair<int,int>pos) : Piece(color,pos){
+            this->piece_tag='R';
+        }
+        Rook(){
+            
+        }
+        
         bool canMoveTo(std::pair<int,int>& dest){
             bool result = false;
             std::pair<int,int> pos = this->getPos();
@@ -15,10 +24,5 @@ class Rook : public Piece{
 
             return result;
         }
-    public:
-        Rook(Color color,std::pair<int,int>pos) : Piece(color,pos){
-            this->piece_tag='R';
-        }
-        
         
 };

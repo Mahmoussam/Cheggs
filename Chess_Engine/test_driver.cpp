@@ -1,13 +1,38 @@
 #include "pawn.cpp"
-#include "rook.cpp"
+
+#include "queen.cpp"
+#ifndef CH_BISHOP_H
+#define CH_BISHOP_H
 #include "bishop.cpp"
+#endif
+
+#ifndef CH_ROOK_H
+#define CH_ROOK_H
+#include "rook.cpp"
+#endif
 using namespace std;
 void test_pawn_black();
 void test_pawn_white();
 void test_rook();
 void test_bishop();
+void test_queen();
 int main(){
-    test_bishop();
+    test_queen();
+}
+void test_queen(){
+    Queen q(Color::WHITE,{5,4});
+    if(!q.moveTo({2,3})){
+        cout<<"Illegale move"<<endl;
+    }
+    cout<<"Moving state : "<<q.moveTo({2,7})<<endl; 
+    pair<int,int> pos=q.getPos();
+    cout<<"cur pos : "<<pos.first<<" "<<pos.second<<endl;
+    cout<<"Moving state : "<<q.moveTo({2,0})<<endl; 
+    pos=q.getPos();
+    cout<<"cur pos : "<<pos.first<<" "<<pos.second<<endl;
+    cout<<"Moving state : "<<q.moveTo({0,7})<<endl; 
+    pos=q.getPos();
+    cout<<"cur pos : "<<pos.first<<" "<<pos.second<<endl;
 }
 void test_bishop(){
     Bishop b(Color::WHITE,{5,4});
