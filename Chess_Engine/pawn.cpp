@@ -2,10 +2,29 @@
 class Pawn : public Piece{
     private:
         bool moved_yet;
-        bool canMoveTo(std::pair<int,int>&){
-            //to be completed
+        bool canMoveTo(std::pair<int,int>& dest){
+            bool result;
+            
+            std::pair<int,int> cur_pos=this->getPos();
+            if(dest.first!=cur_pos.first)
+                //must be on same File/column
+                result = false;
+            else{
+                int distance=dest.second-cur_pos.second;
+                if(this->getColor()==Color::BLACK){
+                    distance *=-1;     
+                }
+                if(distance==1||(distance==2&&!this->hasMovedYet()))
+                        result = true;
+                    else 
+                        result = false;  
+            }
+            
+            return result;
         }
-
+        void set_moved(){
+            this->moved_yet=true;
+        }
     public:
         Pawn(Color color,std::pair<int,int>pos) : Piece(color,pos){
             this->piece_tag='P';
@@ -13,5 +32,14 @@ class Pawn : public Piece{
         }
         bool hasMovedYet(){
             return this->moved_yet;
+        }
+        bool moveTo(std::pair<int,int>dest){
+            
+            bool res = Piece::moveTo(dest);
+            
+            if(res){
+                this->set_moved();
+            }
+            return res;
         }
 };

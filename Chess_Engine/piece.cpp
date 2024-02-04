@@ -15,6 +15,9 @@ class Piece{
         char piece_tag;
         std::pair<int,int> pos;// x,y coordinates ,zero based
         //abstract method, children must implement!
+        /**
+         * Check whether a piece can move to specific destination
+        */
         virtual bool canMoveTo(std::pair<int,int>&)=0;
     public:
         /**
@@ -27,7 +30,10 @@ class Piece{
         }
         
         bool moveTo(std::pair<int,int>dest){
+            
+            
             if(this->canMoveTo(dest)){
+                
                 this->pos=dest;
                 return true;
             }
@@ -39,6 +45,12 @@ class Piece{
         }
         char getNameTag(){
             return this->piece_tag;
+        }
+        /**
+         * getPos: return copy of current position of piece
+        */
+        std::pair<int,int> getPos(){
+            return this->pos;
         }
 };
 
