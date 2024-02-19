@@ -15,10 +15,12 @@ class Pawn : public Piece{
             this->moved_yet=true;
         }
     public:
+        
         Pawn(Color color,std::pair<int,int>pos) : Piece(color,pos){
             this->piece_tag='P';
             this->moved_yet=false;
         }
+        
         bool hasMovedYet(){
             return this->moved_yet;
         }
@@ -26,6 +28,7 @@ class Pawn : public Piece{
             bool result;
             
             std::pair<int,int> cur_pos=this->getPos();
+            
             if(dest.first!=cur_pos.first)
                 //must be on same File/column
                 result = false;
@@ -47,6 +50,7 @@ class Pawn : public Piece{
             bool res = Piece::moveTo(dest);
             
             if(res){
+                
                 this->set_moved();
             }
             return res;

@@ -10,7 +10,7 @@ class Knight : public Piece{
         
     public:
         Knight(Color color,std::pair<int,int>pos) : Piece(color,pos){
-            this->piece_tag='K';
+            this->piece_tag='N';
         }
         Knight(){
             

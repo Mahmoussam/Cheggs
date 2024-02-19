@@ -1,45 +1,54 @@
-#ifndef CH_PAWN_H
-#define CH_PAWN_H
-#include "pawn.cpp"
-#endif
-
-#ifndef CH_BISHOP_H
-#define CH_BISHOP_H
-#include "bishop.cpp"
-#endif
-
-#ifndef CH_ROOK_H
-#define CH_ROOK_H
-#include "rook.cpp"
-#endif
-
-#ifndef CH_QUEEN_H
-#define CH_QUEEN_H
-#include "queen.cpp"
-#endif
-
-#ifndef CH_KING_H
-#define CH_KING_H
-#include "king.cpp"
-#endif
-
-#ifndef CH_KNIGHT_H
-#define CH_KNIGHT_H
-#include "knight.cpp"
-#endif
 
 #ifndef CH_PIECE_H
 #define CH_PIECE_H
 #include "piece.cpp"
 #endif
+
+#include "board.cpp"
 class Engine{
     private:
-        // chess board as 2D array of pieces
-        Piece *board[8][8];
+        Board board;
+        bool white_turn=true;
     public:
-        Engine(){
-            //init board
+        Engine();
+        /*
+        * Convert chess board coordinates to x,y coordinates
+        */
+        std::pair<int,int> coord_to_xy(char *); 
+        bool move(char *coord_from,char *coord_to);
+        void show_board(){
+            board.show_board();
         }
-        void print_board();
-        std::pair<int,int> coord_to_xy(int x,int y); 
+        bool is_white_turn(){
+            return white_turn;
+        }
 };
+Engine::Engine(){
+    board.init_board();
+}
+std::pair<int,int> Engine::coord_to_xy(char *coord){
+    int file = *coord - 'a'
+        ,row=*(coord+1)-'0'-1;//zero based
+    return std::make_pair(file,row);
+}
+bool Engine::move(char *coord_from,char *coord_to){
+    std::pair<int,int>pos1 = coord_to_xy(coord_from)
+        ,pos2 = coord_to_xy(coord_to);
+    //check if turn allows moving this piece
+    try{
+        if(board.is_piece_white(pos1)!=white_turn)
+            return false;
+    }catch(int err_code){
+        return false;
+    }
+    //attempt to make a move
+    if(board.move(pos1,pos2)){
+        
+
+        white_turn = !white_turn;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
